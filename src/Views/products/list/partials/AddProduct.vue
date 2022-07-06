@@ -19,9 +19,12 @@
                   v-model="addedProduct.name"
                   name="name"
                   label="name"
-                  v-validate="{required :true , regex:/^[A-Za-z0-9\d\-_\s]+$/i}"
+                  v-validate="{
+                    required: true,
+                    regex: /^[A-Za-z0-9\d\-_\s]+$/i,
+                  }"
                 ></v-text-field>
-                <span class="validation-error">{{ errors.first('name') }}</span>
+                <!-- <span class="validation-error">{{ errors.first('name') }}</span> -->
               </v-col>
             </v-row>
             <v-row>
@@ -31,20 +34,23 @@
                   name="price"
                   type="number"
                   label="price"
-                  v-validate="{ required: true, regex:/^(?!0*[.,]0*$|[.,]0*$|0*$)\d+[,.]?\d{0,2}$/}"
+                  v-validate="{
+                    required: true,
+                    regex: /^(?!0*[.,]0*$|[.,]0*$|0*$)\d+[,.]?\d{0,2}$/,
+                  }"
                 ></v-text-field>
-                <span class="validation-error">{{ errors.first('price') }}</span>
+                <!-- <span class="validation-error">{{ errors.first('price') }}</span> -->
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
                 <v-text-field
                   v-model="addedProduct.quantity"
-                  v-validate="{ required: true, regex:/^([0-9]+)$/ }"
+                  v-validate="{ required: true, regex: /^([0-9]+)$/ }"
                   name="quantity"
                   label="quantity"
                 ></v-text-field>
-                <span class="validation-error">{{ errors.first('quantity') }}</span>
+                <!-- <span class="validation-error">{{ errors.first('quantity') }}</span> -->
               </v-col>
             </v-row>
             <v-row>
@@ -54,7 +60,7 @@
                   name="description"
                   label="description"
                 ></v-textarea>
-                <span class="validation-error">{{ errors.first('description') }}</span>
+                <!-- <span class="validation-error">{{ errors.first('description') }}</span> -->
               </v-col>
             </v-row>
           </v-container>
@@ -63,7 +69,9 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
-          <v-btn type="submit" color="green darken-1" text form="AddProductForm">Save</v-btn>
+          <v-btn type="submit" color="green darken-1" text form="AddProductForm"
+            >Save</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-form>
@@ -75,29 +83,29 @@ import axios from "axios";
 export default {
   data: () => ({
     dialogAdd: false,
-    
+
     addedProduct: {
       name: "",
       price: "",
       quantity: "",
-      description: ""
-    }
+      description: "",
+    },
   }),
 
   methods: {
     async save() {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then((result) => {
         if (result) {
           new Promise((resolve, reject) => {
             axios
               .post("products", this.addedProduct)
-              .then(res => {
+              .then((res) => {
                 this.close();
-                this.addedProduct={};
+                this.addedProduct = {};
                 this.$bus.emit("add", this.addedProduct);
                 resolve(res);
               })
-              .catch(err => {
+              .catch((err) => {
                 console.log(err.response);
                 reject(err);
               });
@@ -108,8 +116,8 @@ export default {
 
     close() {
       this.dialogAdd = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

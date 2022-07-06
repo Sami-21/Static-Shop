@@ -45,9 +45,9 @@
               <v-btn color="blue darken-1" text @click="closeDeleteDialog"
                 >Cancel</v-btn
               >
-              <v-btn color="red darken-1" text @click="deleteItemConfirm"
+              <!-- <v-btn color="red darken-1" text @click="deleteItemConfirm"
                 >OK</v-btn
-              >
+              > -->
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -94,7 +94,7 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template v-slot:item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-1" @click="viewItem(item)">mdi-eye</v-icon>
       <v-icon small class="mr-1" @click="editItem(item)">mdi-pencil</v-icon>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -108,7 +108,7 @@
 import Add from "./partials/AddProduct.vue";
 import Edit from "./partials/EditProduct.vue";
 import Details from "./partials/ProductDetails.vue";
-import axios from "axios";
+// import axios from "axios";
 export default {
   components: {
     Add,
@@ -148,34 +148,33 @@ export default {
   }),
 
   mounted() {
-    this.$bus.on("add", () => {
-      (this.AddSuccess = true), this.getProducts();
-    });
-
-    this.$bus.on("edit", () => {
-      (this.EditSuccess = true), this.getProducts();
-    });
+    // this.$bus.on("add", () => {
+    //   (this.AddSuccess = true), this.getProducts();
+    // });
+    // this.$bus.on("edit", () => {
+    //   (this.EditSuccess = true), this.getProducts();
+    // });
   },
 
   created() {
-    this.getProducts();
+    // this.getProducts();
   },
 
   methods: {
-    async getProducts() {
-      new Promise((resolve, reject) => {
-        axios
-          .get("products")
-          .then((res) => {
-            this.products = res.data;
-            resolve(res);
-          })
-          .catch((err) => {
-            console.log(err.response);
-            reject(err);
-          });
-      });
-    },
+    // async getProducts() {
+    //   new Promise((resolve, reject) => {
+    //     axios
+    //       .get("products")
+    //       .then((res) => {
+    //         //Getting all products
+    //         resolve(res);
+    //       })
+    //       .catch((err) => {
+    //         //Handling errors
+    //         reject(err);
+    //       });
+    //   });
+    // },
 
     editItem(item) {
       this.editedIndex = this.products.indexOf(item);
@@ -195,22 +194,22 @@ export default {
       this.dialogDelete = true;
     },
 
-    async deleteItemConfirm() {
-      new Promise((resolve, reject) => {
-        axios
-          .delete(`products/${this.products[this.editedIndex].id}`)
-          .then((res) => {
-            this.DeleteSuccess = true;
-            this.closeDeleteDialog();
-            this.getProducts();
-            resolve(res);
-          })
-          .catch((err) => {
-            console.log(err);
-            reject(err);
-          });
-      });
-    },
+    // async deleteItemConfirm() {
+    //   new Promise((resolve, reject) => {
+    //     axios
+    //       .delete(`products/${this.products[this.editedIndex].id}`)
+    //       .then((res) => {
+    //         this.DeleteSuccess = true;
+    //         this.closeDeleteDialog();
+    //         this.getProducts();
+    //         resolve(res);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //         reject(err);
+    //       });
+    //   });
+    // },
 
     close() {
       this.dialogEdit = false;
