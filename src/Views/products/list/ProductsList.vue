@@ -21,7 +21,7 @@
 
         <Add />
 
-        <Edit
+        <!-- <Edit
           :dialogEdit="dialogEdit"
           :close="close"
           :current="currentItem"
@@ -33,7 +33,7 @@
           :close="close"
           :item="currentItem"
           v-if="dialogView"
-        />
+        /> -->
 
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -45,9 +45,9 @@
               <v-btn color="blue darken-1" text @click="closeDeleteDialog"
                 >Cancel</v-btn
               >
-              <!-- <v-btn color="red darken-1" text @click="deleteItemConfirm"
+              <v-btn color="red darken-1" text @click="deleteItemConfirm"
                 >OK</v-btn
-              > -->
+              >
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -106,14 +106,15 @@
 </template>
 <script>
 import Add from "./partials/AddProduct.vue";
-import Edit from "./partials/EditProduct.vue";
-import Details from "./partials/ProductDetails.vue";
+// import Edit from "./partials/EditProduct.vue";
+// import Details from "./partials/ProductDetails.vue";
 // import axios from "axios";
+
 export default {
   components: {
     Add,
-    Edit,
-    Details,
+    // Edit,
+    // Details,
   },
 
   data: () => ({
@@ -131,7 +132,6 @@ export default {
         value: "name",
       },
       { text: "Price", value: "price" },
-      { text: "Quantity", value: "quantity" },
       { text: "Actions", value: "actions", sortable: false },
     ],
 
@@ -141,16 +141,16 @@ export default {
     currentItem: {},
     defaultItem: {
       name: "",
-      email: "",
-      phone: "",
-      address: "",
+      price: "",
+      image: null,
+      description: "",
     },
   }),
 
   mounted() {
-    // this.$bus.on("add", () => {
-    //   (this.AddSuccess = true), this.getProducts();
-    // });
+    this.$bus.on("add", (product) => {
+      (this.AddSuccess = true), this.products.push(product);
+    });
     // this.$bus.on("edit", () => {
     //   (this.EditSuccess = true), this.getProducts();
     // });
@@ -194,22 +194,22 @@ export default {
       this.dialogDelete = true;
     },
 
-    // async deleteItemConfirm() {
-    //   new Promise((resolve, reject) => {
-    //     axios
-    //       .delete(`products/${this.products[this.editedIndex].id}`)
-    //       .then((res) => {
-    //         this.DeleteSuccess = true;
-    //         this.closeDeleteDialog();
-    //         this.getProducts();
-    //         resolve(res);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //         reject(err);
-    //       });
-    //   });
-    // },
+    async deleteItemConfirm() {
+      // new Promise((resolve, reject) => {
+      //   axios
+      //     .delete(`products/${this.products[this.editedIndex].id}`)
+      //     .then((res) => {
+      //       this.DeleteSuccess = true;
+      //       this.closeDeleteDialog();
+      //       this.getProducts();
+      //       resolve(res);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err);
+      //       reject(err);
+      //     });
+      // });
+    },
 
     close() {
       this.dialogEdit = false;

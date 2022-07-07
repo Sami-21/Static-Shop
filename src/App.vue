@@ -37,7 +37,7 @@
         </v-list>
       </v-navigation-drawer>
     </v-card>
-    <div class="w-full h-full ml-16 my-12">
+    <div class="w-11/12 h-full ml-16 my-12">
       <router-view />
     </div>
   </v-app>
@@ -51,7 +51,7 @@ export default {
         { title: "Dashboard", icon: "mdi-view-dashboard", path: "/" },
         {
           title: "Categories",
-          icon: "mdi-shopping",
+          icon: "mdi-shape",
           path: "/categories",
         },
         {

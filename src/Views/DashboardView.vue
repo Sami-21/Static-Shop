@@ -28,27 +28,15 @@ export default {
     Statistics: {
       headerStats: [
         {
-          title: "Clients",
+          title: "Products",
           icon: "mdi-account-group",
           color: "#6CCFC1",
           count: 0,
         },
         {
-          title: "Providers",
+          title: "Categories",
           icon: "mdi-account-wrench",
           color: "#F17374",
-          count: 0,
-        },
-        {
-          title: "Products",
-          icon: "mdi-package-variant-closed",
-          color: "#68ACFA",
-          count: 0,
-        },
-        {
-          title: "Transactions",
-          icon: "mdi-cash-multiple",
-          color: "#F7A83A",
           count: 0,
         },
       ],

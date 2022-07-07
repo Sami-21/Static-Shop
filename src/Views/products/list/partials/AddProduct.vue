@@ -16,51 +16,45 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="addedProduct.name"
+                  v-model="newProduct.name"
                   name="name"
                   label="name"
-                  v-validate="{
-                    required: true,
-                    regex: /^[A-Za-z0-9\d\-_\s]+$/i,
-                  }"
+                  :rules="productNameRules"
                 ></v-text-field>
-                <!-- <span class="validation-error">{{ errors.first('name') }}</span> -->
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="addedProduct.price"
+                  v-model="newProduct.price"
                   name="price"
                   type="number"
                   label="price"
-                  v-validate="{
-                    required: true,
-                    regex: /^(?!0*[.,]0*$|[.,]0*$|0*$)\d+[,.]?\d{0,2}$/,
-                  }"
+                  :rules="productPriceRules"
                 ></v-text-field>
-                <!-- <span class="validation-error">{{ errors.first('price') }}</span> -->
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
-                <v-text-field
-                  v-model="addedProduct.quantity"
-                  v-validate="{ required: true, regex: /^([0-9]+)$/ }"
-                  name="quantity"
-                  label="quantity"
-                ></v-text-field>
-                <!-- <span class="validation-error">{{ errors.first('quantity') }}</span> -->
+                <v-file-input
+                  v-model="newProduct.image"
+                  show-size
+                  truncate-length="15"
+                  label="Select your product's image"
+                ></v-file-input>
               </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12"> </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
                 <v-textarea
-                  v-model="addedProduct.description"
+                  v-model="newProduct.description"
                   name="description"
                   label="description"
                 ></v-textarea>
-                <!-- <span class="validation-error">{{ errors.first('description') }}</span> -->
               </v-col>
             </v-row>
           </v-container>
@@ -78,40 +72,46 @@
   </v-dialog>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   data: () => ({
     dialogAdd: false,
-
-    addedProduct: {
+    newProduct: {
       name: "",
       price: "",
-      quantity: "",
+      image: null,
       description: "",
     },
+    productNameRules: [
+      (v) => !!v || "Proudct name is required",
+      (v) => (v && v.length > 2) || "Proudct name is too short",
+    ],
+    productPriceRules: [
+      (v) => !!v || "Proudct price is required",
+      (v) => (v && v > 0) || "product price is invalid",
+    ],
   }),
 
   methods: {
     async save() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          new Promise((resolve, reject) => {
-            axios
-              .post("products", this.addedProduct)
-              .then((res) => {
-                this.close();
-                this.addedProduct = {};
-                this.$bus.emit("add", this.addedProduct);
-                resolve(res);
-              })
-              .catch((err) => {
-                console.log(err.response);
-                reject(err);
-              });
-          });
-        }
-      });
+      this.$bus.emit("add", this.newProduct);
+      this.close();
+
+      // new Promise((resolve, reject) => {
+      //   axios
+      //     .post("products", this.newProduct)
+      //     .then((res) => {
+      //       this.close();
+      //       this.newProduct = {};
+      //       this.$bus.emit("add", this.newProduct);
+      //       resolve(res);
+      //     })
+      //     .catch((err) => {
+      //       console.log(err.response);
+      //       reject(err);
+      //     });
+      // });
     },
 
     close() {
