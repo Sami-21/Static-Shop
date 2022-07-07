@@ -23,17 +23,45 @@
                 ></v-text-field>
               </v-col>
             </v-row>
+            <v-text-field
+              v-model="newProduct.price"
+              name="price"
+              type="number"
+              label="price"
+              :rules="productPriceRules"
+            ></v-text-field>
+            <v-row>
+              <v-col cols="12">
+                <v-select
+                  v-model="newProduct.type"
+                  :items="productType"
+                  label="Product Type"
+                  :rules="[(v) => !!v || 'Product type os required']"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-select
+                  v-model="newProduct.category"
+                  :items="categories"
+                  label="Category"
+                  :rules="[(v) => !!v || 'category is required']"
+                ></v-select>
+              </v-col>
+            </v-row>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="newProduct.price"
-                  name="price"
-                  type="number"
-                  label="price"
-                  :rules="productPriceRules"
+                  v-model="newProduct.tag"
+                  name="tag"
+                  type="text"
+                  label="tag"
+                  :rules="[(v) => !!v || 'tags are required']"
                 ></v-text-field>
               </v-col>
             </v-row>
+
             <v-row>
               <v-col cols="12">
                 <v-file-input
@@ -80,9 +108,14 @@ export default {
     newProduct: {
       name: "",
       price: "",
+      type: null,
+      category: null,
+      tag: null,
       image: null,
       description: "",
     },
+    productType: ["Type1", "Type2", "Type3", "Type4"],
+    categories: ["category1", "category2", "category3", "category4"],
     productNameRules: [
       (v) => !!v || "Proudct name is required",
       (v) => (v && v.length > 2) || "Proudct name is too short",
@@ -126,3 +159,5 @@ export default {
   color: #f00;
 }
 </style>
+
+<!--productType , category , -->
