@@ -29,37 +29,37 @@ export default {
       headerStats: [
         {
           title: "Products",
-          icon: "mdi-account-group",
+          icon: "mdi-shopping",
           color: "#6CCFC1",
           count: 0,
         },
         {
           title: "Categories",
-          icon: "mdi-account-wrench",
+          icon: "mdi-shape",
           color: "#F17374",
           count: 0,
         },
       ],
 
-      topTransactionsClients: {
-        name: "Top 5 Clients (Transactions)",
-        data: [],
-      },
+      // topTransactionsClients: {
+      //   name: "Top 5 Clients (Transactions)",
+      //   data: [],
+      // },
 
-      topSpendingClients: {
-        name: "Top 5 Clients ",
-        data: [],
-      },
+      // topSpendingClients: {
+      //   name: "Top 5 Clients ",
+      //   data: [],
+      // },
 
-      topSellingProducts: {
-        name: "Top 5 Products",
-        data: [],
-      },
+      // topSellingProducts: {
+      //   name: "Top 5 Products",
+      //   data: [],
+      // },
 
-      topTransactions: {
-        name: "Top 5 Transactions",
-        data: [],
-      },
+      // topTransactions: {
+      //   name: "Top 5 Transactions",
+      //   data: [],
+      // },
     },
   }),
 

@@ -132,6 +132,7 @@ export default {
         value: "name",
       },
       { text: "Price", value: "price" },
+      { text: "Price", value: "price" },
       { text: "Actions", value: "actions", sortable: false },
     ],
 
@@ -142,6 +143,9 @@ export default {
     defaultItem: {
       name: "",
       price: "",
+      tags: "",
+      category: null,
+      type: null,
       image: null,
       description: "",
     },
