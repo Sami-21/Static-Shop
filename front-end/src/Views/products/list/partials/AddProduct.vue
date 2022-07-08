@@ -53,7 +53,8 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="newProduct.tag"
+                  v-model="newProduct.tags"
+                  hint="seperate your tags with a comma ','"
                   name="tag"
                   type="text"
                   label="tag"
@@ -110,7 +111,7 @@ export default {
       price: "",
       type: null,
       category: null,
-      tag: null,
+      tags: null,
       image: null,
       description: "",
     },
@@ -128,8 +129,11 @@ export default {
 
   methods: {
     async save() {
+      this.newProduct.tags = this.newProduct.tags.split(",");
+      console.log(this.newProduct.tags);
       this.$bus.emit("add", this.newProduct);
       this.close();
+      this.newProduct = {};
 
       // new Promise((resolve, reject) => {
       //   axios
