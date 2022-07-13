@@ -8,7 +8,7 @@ interface ProductDoc extends Document {
   category: Category;
   tag: [string];
   rating: number;
-  image:[string]
+  image: [string];
   price: number;
 }
 
@@ -23,7 +23,7 @@ const ProductSchema = new Schema<ProductDoc>({
   },
   product_Type: {
     type: String,
-    enum: ["shampoing", "creme", "gel", "maquillage", "deodorant"],
+    enum: ["shampoing", "creme", "gel", "maquillage", "soin"],
     required: true,
   },
   category: {
