@@ -23,3 +23,14 @@ export interface CreateProduct {
   image: [string];
   price: number;
 }
+
+export interface Update{
+  title: string;
+  description: string;
+  product_Type: TypeProduct;
+  category: Category;
+  tag: [string];
+  rating: number;
+  image: [string];
+  price: number;
+}
